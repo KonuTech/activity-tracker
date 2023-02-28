@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 
 {% block main_content %}
-<section class="habit-list">
+<section class="activity-list">
     {% for activity in activities %}
-        <div class="activity">
-            <p class="activity__name">
-                {{ activity }}
-            </p>
-        </div>
+    <div class="activity">
+        <p class="activity__name">
+            {{ activity }}
+        </p>
+    </div>
     {% endfor %}
 </section>
 {% endblock %}
