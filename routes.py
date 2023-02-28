@@ -1,9 +1,8 @@
 import datetime
 from collections import defaultdict
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for
 
-app = Flask(__name__)
-
+pages = Blueprint("activities", __name__, template_folder="templates", static_folder="static")
 activities = ["Test activity"]
 completions = defaultdict(list)
 
@@ -13,7 +12,7 @@ def date_range(start: datetime.date):
     return dates
 
 
-@app.context_processor
+@pages.context_processor
 def add_calc_date_range():
     def date_range(start: datetime.date):
         dates = [start + datetime.timedelta(days=diff) for diff in range(-3, 4)]
@@ -22,7 +21,7 @@ def add_calc_date_range():
     return {"date_range": date_range}
 
 
-@app.route("/")
+@pages.route("/")
 def index():
     date_str = request.args.get("date")
     if date_str:
@@ -38,7 +37,7 @@ def index():
     )
 
 
-@app.route("/add", methods=["GET", "POST"])
+@pages.route("/add", methods=["GET", "POST"])
 def add_activity():
     if request.method == "POST":
         activity = request.form.get("activity")
@@ -50,7 +49,7 @@ def add_activity():
     )
 
 
-@app.route("/complete", methods=["POST"])
+@pages.route("/complete", methods=["POST"])
 def complete():
     date_string = request.form.get("date")
     activity = request.form.get("activityName")
