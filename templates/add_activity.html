@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
 
-</body>
-</html>
+{% block main_content %}
+
+<form class="form" method="POST">
+    <textarea class="form_input" cols="30" id="activity" name="activity" placeholder="Add a new daily activity"
+              rows="3"></textarea>
+    <button class="form_button" type="submit" class="form_button">Add</button>
+</form>
+
+{% endblock %}

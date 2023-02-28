@@ -2,9 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"/>
 
+    {% block head_content %} {% endblock %}
+</head>
+
+<body>
+<header class="header">
+    <h1 class="header_logo">
+        <a class="header__link" href="{{ url_for('index') }}">
+            Activities
+        </a>
+    </h1>
+    {% if "add" not in request.endpoint %}
+        <a href="{{ url_for('add_activity') }}" class="header__link">+ Add new</a>
+    {% endif %}
+</header>
+
+<main class="main">
+    {% block main_content %}
+    {% endblock %}
+</main>
 </body>
 </html>
