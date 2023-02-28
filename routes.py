@@ -2,6 +2,7 @@ import datetime
 from collections import defaultdict
 from flask import Blueprint, render_template, request, redirect, url_for
 
+
 pages = Blueprint("activities", __name__, template_folder="templates", static_folder="static")
 activities = ["Test activity"]
 completions = defaultdict(list)
@@ -56,4 +57,4 @@ def complete():
     date = datetime.date.fromisoformat(date_string)
     completions[date].append(activity)
 
-    return redirect(url_for("index", date=date_string))
+    return redirect(url_for("activities.index", date=date_string))
