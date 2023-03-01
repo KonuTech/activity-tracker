@@ -3,11 +3,11 @@
 {% block main_content %}
 <section class="activity-list">
     {% for activity in activities %}
-        {% set completed = activity in activities %}
+        {% set completed = activity["_id"] in activities %}
         {% if completed %}
             <div class="activity completed">
                 <p class="activity__name">
-                    {{ activity }}
+                    {{ activity["name"] }}
                 </p>
                 <svg class="activity__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -15,11 +15,11 @@
             </div>
         {% else %}
             <div class="activity">
-                <form method="POST" class="activity__form" action={{ url_for('activities.complete') }}"">
-                    <input type="hidden" name="activityName" value="{{ activity }}" />
-                    <input type="hidden" name="date" value="{{ selected_date }}" />
+                <form method="POST" class="activity__form" action="{{ url_for('activities.complete') }}">
+                    <input type="hidden" id="activityId" value="{{ activity['_id'] }}" />
+                    <input type="hidden" id="date" value="{{ selected_date }}" />
                     <button type="submit" class="activity_button">
-                        {{ activity }}
+                        {{ activity["name"] }}
                     </button>
                 </form>
             </div>
